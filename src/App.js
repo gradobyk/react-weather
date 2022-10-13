@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export default function App() {
+  
   const [city, setCity] = useState("");
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState("");
   const [data, setData] = useState("");
 
   function showWeather(response) {
@@ -28,10 +30,22 @@ export default function App() {
   function showCity(event) {
     setCity(event.target.value);
   }
+  
   let form = (
     <form onSubmit={handleSubmit}>
-      <input type="search" placeholder="Type a city" onChange={showCity} />
-      <input type="submit" value="Search" />
+      <div className="row mt-2">
+        <div className="col-9">
+          <input
+            className="seacheForm"
+            type="search"
+            placeholder="Type a city"
+            onChange={showCity}
+          />
+        </div>
+        <div className="col-3">
+          <input className="btn btn-primary" type="submit" value="Search" />
+        </div>
+      </div>
     </form>
   );
 
@@ -45,9 +59,9 @@ export default function App() {
 
   if (show) {
     return (
-      <div className="text-center">
+      <div>
         {form}
-        <ul className="myList mt-4">
+        <ul className="">
           {weatherDesc.map(function (counAll) {
             return <li>{counAll}</li>;
           })}
@@ -56,5 +70,9 @@ export default function App() {
     );
   } else {
     return form;
+    
   }
 }
+
+
+
